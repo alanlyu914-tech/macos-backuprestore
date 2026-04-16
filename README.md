@@ -255,27 +255,10 @@ cd ~/macos-backuprestore/scripts
 
 ---
 
-## 🔮 未来计划
-
-- [ ] 云备份支持（iCloud、Google Drive）
-- [ ] 定时自动备份
-- [ ] GUI 图形界面
-- [ ] Linux 迁移支持
-- [ ] Windows 迁移支持
-
----
-
-## 📞 获取帮助
-
-- 📖 查看完整文档
-- 🐛 [报告问题](https://github.com/alanlyu914-tech/macos-backuprestore/issues)
-- 💬 [讨论交流](https://github.com/alanlyu914-tech/macos-backuprestore/discussions)
-
----
-
 ## 📧 联系方式
 
 - **作者：** 大东
+- **微信：** dadongalan
 - **GitHub：** [@alanlyu914-tech](https://github.com/alanlyu914-tech)
 - **项目：** [macos-backuprestore](https://github.com/alanlyu914-tech/macos-backuprestore)
 
