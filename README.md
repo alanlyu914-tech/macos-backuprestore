@@ -259,6 +259,7 @@ cd ~/macos-backuprestore/scripts
 
 - **作者：** 大东
 - **微信：** dadongalan
+- **邮箱：** alanlyu914@gmail.com
 - **GitHub：** [@alanlyu914-tech](https://github.com/alanlyu914-tech)
 - **项目：** [macos-backuprestore](https://github.com/alanlyu914-tech/macos-backuprestore)
 
