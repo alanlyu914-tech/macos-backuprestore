@@ -125,6 +125,9 @@ cd ~/macos-backuprestore/scripts
 
 # 5. 恢复项目依赖
 ./restore-projects.sh
+
+# 6. 恢复 GitHub 配置（可选）
+./restore-github.sh
 \`\`\`
 
 ---
@@ -190,10 +193,9 @@ cd ~/macos-backuprestore/scripts
 
 项目包含完整的文档：
 
-- **恢复指南.md** - 完整的迁移步骤教程
-- **AI项目迁移指南.md** - AI 项目专项迁移教程
-- **项目配置参考.md** - 环境变量配置说明
-- **快速参考.txt** - 命令速查表
+- **GitHub配置说明.md** - GitHub 开发环境完整配置教程
+- **GitHub仓库信息.md** - 仓库信息和常用命令
+- **GitHub快速参考.md** - 快速查找常用命令
 
 ---
 
