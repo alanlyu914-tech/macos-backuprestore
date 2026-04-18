@@ -269,32 +269,6 @@ cd ~/macos-backuprestore/scripts
 
 ---
 
-## 📚 详细文档
-
-项目包含完整的文档：
-
-- **GitHub配置说明.md** - GitHub 开发环境完整配置教程
-- **GitHub仓库信息.md** - 仓库信息和常用命令
-- **GitHub快速参考.md** - 快速查找常用命令
-
----
-
-## 🌟 支持的项目类型
-
-### 🤖 AI/ML 项目
-- Python 项目（requirements.txt）
-- Node.js 项目（package.json）
-- Jupyter Notebooks
-- 数据科学项目
-
-### 💻 通用开发项目
-- Web 前端/后端项目
-- 移动应用项目
-- 桌面应用项目
-- 开发工具项目
-
----
-
 ## 🔒 安全说明
 
 - **本地运行** - 所有数据都在你的电脑上处理，不上传服务器
