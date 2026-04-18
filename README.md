@@ -269,36 +269,6 @@ cd ~/macos-backuprestore/scripts
 
 ---
 
-## 🔒 安全说明
-
-- **本地运行** - 所有数据都在你的电脑上处理，不上传服务器
-- **SSH 密钥** - 安全备份，权限自动设置为 600
-- **环境变量** - 备份 .env 文件，请妥善保管
-- **开源透明** - 代码完全开源，你可以审查每一行
-
----
-
-## 🤝 贡献
-
-欢迎贡献！你可以：
-
-- 🐛 报告 Bug
-- 💡 提出新功能建议
-- 📝 改进文档
-- 🔧 提交代码
-
-**如何贡献：**
-
-1. Fork 本项目
-2. 创建你的功能分支 (git checkout -b feature/AmazingFeature)
-3. 提交更改 (git commit -m 'Add some AmazingFeature')
-4. 推送到分支 (git push origin feature/AmazingFeature)
-5. 开启 Pull Request
-
-详见 [贡献指南](CONTRIBUTING.md)
-
----
-
 ## 📧 联系方式
 
 - **作者：** 大东
