@@ -68,27 +68,25 @@ macOS 的「迁移助理」很好用，但有几个局限性：
 │  ① 复制备份文件夹到新电脑                                         │
 │     cp -r /Volumes/外置硬盘/macos-backuprestore ~/               │
 │                                                                  │
-│  ② 安装并配置 Homebrew（前置要求）                                │
-│     ├── /bin/bash -c "$(curl -fsSL https://...install.sh)"     │
-│     └── ./scripts/ensure-homebrew-in-path.sh  ← 自动检测并配置 PATH │
+│  ② 运行一键恢复脚本                                              │
+│     cd ~/macos-backuprestore/scripts                             │
+│     ./restore-all.sh                                             │
 │                                                                  │
-│  ③ 运行恢复脚本                                                  │
-│     ├── ./scripts/restore.sh              ← 恢复系统配置        │
-│     ├── ./scripts/reinstall-everything.sh  ← 安装应用和工具      │
-│     ├── ./scripts/restore-code.sh         ← 恢复代码项目        │
-│     └── ./scripts/restore-projects.sh     ← 恢复项目依赖        │
+│     ├─ 自动检测并安装 Homebrew                                   │
+│     ├─ 自动配置 PATH（Apple Silicon/Intel）                      │
+│     ├─ 恢复系统配置                                              │
+│     ├─ 安装应用和工具                                            │
+│     ├─ 恢复代码项目（可选）                                      │
+│     └─ 恢复项目依赖（可选）                                      │
 │                                                                  │
-│  ④ 手动复制个人文件（如果之前备份了）                            │
-│     ├── 外置硬盘/Documents  → ~/Documents                        │
-│     ├── 外置硬盘/Pictures   → ~/Pictures                         │
-│     ├── 外置硬盘/Movies     → ~/Movies                           │
-│     └── 外置硬盘/Desktop    → ~/Desktop                          │
+│  ③ 复制个人文件（可选，使用辅助脚本）                             │
+│     ./copy-files.sh restore                                      │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 
 📝 总结：
    ✅ 自动处理：扫描、备份、安装 Homebrew、配置 PATH、恢复配置、安装应用、恢复代码
-   ⚠️  手动操作：复制大文件到外置硬盘、在新电脑上复制回来
+   ⚠️  手动操作：复制大文件到外置硬盘（可使用辅助脚本简化）
 ```
 
 ---
@@ -102,47 +100,46 @@ macOS 的「迁移助理」很好用，但有几个局限性：
 git clone https://github.com/alanlyu914-tech/macos-backuprestore.git
 cd macos-backuprestore
 
-# 2. 运行备份脚本
+# 2. 运行一键备份脚本
 ./backup.sh
 \`\`\`
 
 **然后：**
-1. 工具会扫描你的电脑，显示发现了什么
+1. 工具会自动扫描你的电脑，显示发现了什么
 2. 逐项确认要备份的内容（都有大白话解释）
 3. 确认后开始自动备份
 4. 将整个文件夹复制到外置硬盘或云盘
+
+**可选：复制大文件到外置硬盘**
+\`\`\`bash
+cd ~/macos-backuprestore/scripts
+./copy-files.sh backup
+\`\`\`
 
 ---
 
 ### 第二步：恢复（新电脑/重装后）
 
-> ⚠️ **前置要求：** 在开始恢复前，**必须先安装 Homebrew**，否则恢复脚本无法运行。
-
 \`\`\`bash
 # 1. 从外置硬盘复制项目到新电脑
 cp -r /Volumes/你的外置硬盘/macos-backuprestore ~/
 
-# 2. 安装 Homebrew（必须！恢复脚本依赖它）
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# 3. 自动配置 Homebrew PATH（智能检测 Apple Silicon/Intel Mac）
+# 2. 运行一键恢复脚本
 cd ~/macos-backuprestore/scripts
-./ensure-homebrew-in-path.sh
+./restore-all.sh
+\`\`\`
 
-# 4. 恢复系统配置
-./restore.sh
+**就这么简单！** 脚本会自动：
+- ✅ 检测并安装 Homebrew
+- ✅ 配置 PATH（智能识别 Apple Silicon/Intel Mac）
+- ✅ 恢复系统配置
+- ✅ 安装所有应用和工具
+- ✅ 恢复代码项目（可选）
+- ✅ 恢复项目依赖（可选）
 
-# 5. 安装你之前备份的应用和工具
-./reinstall-everything.sh
-
-# 6. 恢复代码项目
-./restore-code.sh
-
-# 7. 恢复项目依赖
-./restore-projects.sh
-
-# 8. 恢复 GitHub 配置（可选）
-./restore-github.sh
+**可选：恢复个人文件**
+\`\`\`bash
+./copy-files.sh restore
 \`\`\`
 
 ---
@@ -173,7 +170,75 @@ cd ~/macos-backuprestore/scripts
 - ~/Movies（视频）
 - ~/Desktop（桌面）
 
-> **为什么手动复制？** 这些文件通常很大，用 Finder 复制更直观。工具会给你详细的提示。
+> **为什么手动复制？** 这些文件通常很大，使用辅助脚本 `copy-files.sh` 可以更方便地复制。
+
+---
+
+## 🎯 一键脚本功能
+
+### 📦 backup.sh - 一键备份
+
+**功能：**
+- 🔍 自动扫描开发环境、应用、配置、代码项目
+- 📋 交互式选择要备份的内容
+- 💾 自动备份到 `~/macos-backuprestore/`
+- 📝 生成恢复脚本
+
+**使用：**
+\`\`\`bash
+./backup.sh
+\`\`\`
+
+---
+
+### 🔄 restore-all.sh - 一键恢复
+
+**功能：**
+- ✅ 自动检测并安装 Homebrew
+- 🎯 智能配置 PATH（Apple Silicon/Intel）
+- ⚙️ 恢复系统配置
+- 📦 安装所有应用和工具
+- 💻 恢复代码项目
+- 🔧 恢复项目依赖
+
+**使用：**
+\`\`\`bash
+cd ~/macos-backuprestore/scripts
+./restore-all.sh
+\`\`\`
+
+**优势：**
+- 从 8 步减少到 1 步
+- 自动处理所有依赖检查
+- 彩色输出，进度清晰
+
+---
+
+### 📁 copy-files.sh - 文件复制辅助
+
+**功能：**
+- 💾 备份文件到外置硬盘
+- 📥 从外置硬盘恢复文件
+- 🔍 列出可用外置硬盘
+- ✅ 验证文件完整性
+- 📝 生成一键复制命令
+
+**使用：**
+\`\`\`bash
+cd ~/macos-backuprestore/scripts
+
+# 查看可用硬盘
+./copy-files.sh list
+
+# 备份文件
+./copy-files.sh backup
+
+# 恢复文件
+./copy-files.sh restore
+
+# 验证文件
+./copy-files.sh verify
+\`\`\`
 
 ---
 
