@@ -325,18 +325,6 @@ cd ~/macos-backuprestore/scripts
 
 ---
 
-## 📝 开源协议
-
-本项目采用 MIT License 开源协议。
-
-这意味着你可以：
-- ✅ 自由使用
-- ✅ 自由修改
-- ✅ 自由分发
-- ✅ 用于商业用途
-
----
-
 ## 📧 联系方式
 
 - **作者：** 大东
@@ -344,9 +332,3 @@ cd ~/macos-backuprestore/scripts
 - **邮箱：** alanlyu914@gmail.com
 - **GitHub：** [@alanlyu914-tech](https://github.com/alanlyu914-tech)
 - **项目：** [macos-backuprestore](https://github.com/alanlyu914-tech/macos-backuprestore)
-
----
-
-**🎉 祝你迁移顺利！**
-
-*补充 macOS 自带迁移工具，让开发环境迁移更简单！*
