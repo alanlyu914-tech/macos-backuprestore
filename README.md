@@ -65,13 +65,20 @@ macOS 的「迁移助理」很好用，但有几个局限性：
 │                        📁 新电脑/重装后                           │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  ① 运行恢复脚本                                                  │
+│  ① 复制备份文件夹到新电脑                                         │
+│     cp -r /Volumes/外置硬盘/macos-backuprestore ~/               │
+│                                                                  │
+│  ② 安装并配置 Homebrew（前置要求）                                │
+│     ├── /bin/bash -c "$(curl -fsSL https://...install.sh)"     │
+│     └── ./scripts/ensure-homebrew-in-path.sh  ← 自动检测并配置 PATH │
+│                                                                  │
+│  ③ 运行恢复脚本                                                  │
 │     ├── ./scripts/restore.sh              ← 恢复系统配置        │
 │     ├── ./scripts/reinstall-everything.sh  ← 安装应用和工具      │
 │     ├── ./scripts/restore-code.sh         ← 恢复代码项目        │
 │     └── ./scripts/restore-projects.sh     ← 恢复项目依赖        │
 │                                                                  │
-│  ② 手动复制个人文件（如果之前备份了）                            │
+│  ④ 手动复制个人文件（如果之前备份了）                            │
 │     ├── 外置硬盘/Documents  → ~/Documents                        │
 │     ├── 外置硬盘/Pictures   → ~/Pictures                         │
 │     ├── 外置硬盘/Movies     → ~/Movies                           │
@@ -80,7 +87,7 @@ macOS 的「迁移助理」很好用，但有几个局限性：
 └─────────────────────────────────────────────────────────────────┘
 
 📝 总结：
-   ✅ 自动处理：扫描、备份、恢复配置、安装应用、恢复代码
+   ✅ 自动处理：扫描、备份、安装 Homebrew、配置 PATH、恢复配置、安装应用、恢复代码
    ⚠️  手动操作：复制大文件到外置硬盘、在新电脑上复制回来
 ```
 
@@ -118,25 +125,23 @@ cp -r /Volumes/你的外置硬盘/macos-backuprestore ~/
 # 2. 安装 Homebrew（必须！恢复脚本依赖它）
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# 安装完成后，根据终端提示将 Homebrew 添加到 PATH：
-#  - Apple Silicon (M1/M2/M3): 添加到 ~/.zprofile
-#  - Intel Mac: 添加到 ~/.bash_profile
-# 然后运行: source ~/.zprofile  (或 source ~/.bash_profile)
-
-# 3. 恢复系统配置
+# 3. 自动配置 Homebrew PATH（智能检测 Apple Silicon/Intel Mac）
 cd ~/macos-backuprestore/scripts
+./ensure-homebrew-in-path.sh
+
+# 4. 恢复系统配置
 ./restore.sh
 
-# 4. 安装你之前备份的应用和工具
+# 5. 安装你之前备份的应用和工具
 ./reinstall-everything.sh
 
-# 5. 恢复代码项目
+# 6. 恢复代码项目
 ./restore-code.sh
 
-# 6. 恢复项目依赖
+# 7. 恢复项目依赖
 ./restore-projects.sh
 
-# 7. 恢复 GitHub 配置（可选）
+# 8. 恢复 GitHub 配置（可选）
 ./restore-github.sh
 \`\`\`
 
