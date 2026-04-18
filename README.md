@@ -109,24 +109,34 @@ cd macos-backuprestore
 
 ### 第二步：恢复（新电脑/重装后）
 
+> ⚠️ **前置要求：** 在开始恢复前，**必须先安装 Homebrew**，否则恢复脚本无法运行。
+
 \`\`\`bash
 # 1. 从外置硬盘复制项目到新电脑
 cp -r /Volumes/你的外置硬盘/macos-backuprestore ~/
 
-# 2. 恢复系统配置
+# 2. 安装 Homebrew（必须！恢复脚本依赖它）
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# 安装完成后，根据终端提示将 Homebrew 添加到 PATH：
+#  - Apple Silicon (M1/M2/M3): 添加到 ~/.zprofile
+#  - Intel Mac: 添加到 ~/.bash_profile
+# 然后运行: source ~/.zprofile  (或 source ~/.bash_profile)
+
+# 3. 恢复系统配置
 cd ~/macos-backuprestore/scripts
 ./restore.sh
 
-# 3. 安装你之前备份的应用和工具
+# 4. 安装你之前备份的应用和工具
 ./reinstall-everything.sh
 
-# 4. 恢复代码项目
+# 5. 恢复代码项目
 ./restore-code.sh
 
-# 5. 恢复项目依赖
+# 6. 恢复项目依赖
 ./restore-projects.sh
 
-# 6. 恢复 GitHub 配置（可选）
+# 7. 恢复 GitHub 配置（可选）
 ./restore-github.sh
 \`\`\`
 
